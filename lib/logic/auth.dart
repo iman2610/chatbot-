@@ -16,12 +16,12 @@ class Auth {
   static String id = '';
   final bool _requireConsent = false;
 
-  Future<void> linitializeOnesignal() async {
-    OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
-    await OneSignal.shared.setAppId("50c2523b-ad83-4410-8945-c16f92a18b50");
-    OneSignal.shared.setRequiresUserPrivacyConsent(_requireConsent);
-    OneSignal.shared.setExternalUserId('1');
-  }
+  // Future<void> linitializeOnesignal() async {
+  //   OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+  //   await OneSignal.shared.setAppId("50c2523b-ad83-4410-8945-c16f92a18b50");
+  //   OneSignal.shared.setRequiresUserPrivacyConsent(_requireConsent);
+  //   OneSignal.shared.setExternalUserId('1');
+  // }
 
   Future<LoginModel> login(String email, String password) async {
     final apiUrl = '$baseUrl/$loginUrl';
@@ -52,7 +52,11 @@ class Auth {
     final response = await http.post(
       Uri.parse(refreshUrl),
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'refresh': refreshToken}),
+      body: jsonEncode(
+        {
+          'refresh': refreshToken,
+        },
+      ),
     );
     final data = jsonDecode(response.body);
     accessToken = data['access'];

@@ -19,12 +19,14 @@ import '../constants/constants.dart';
 import '../providers/themeprovider.dart';
 import 'localizations.dart';
 import 'package:http/http.dart' as http;
+import 'main.dart';
 import 'message.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'localizations.dart';
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/services.dart';
+import 'profile.dart';
 
 class ChatScreen extends StatefulWidget {
   final LoginModel model;
@@ -39,11 +41,26 @@ class ChatScreen extends StatefulWidget {
 class ChatMessage {}
 
 String? response;
+String? url;
 
 class _ChatScreenState extends State<ChatScreen> {
   List<String> _messages = [];
   List<String> _reponses = [];
   List<String> _dates = [];
+
+  void _changeLanguage(BuildContext context, Locale locale) {
+    setState(() {
+      AppLocalizations localizations = AppLocalizations(locale);
+      localizations.load().then((_) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+              builder: (_) => ChatScreen(
+                    model: widget.model,
+                  )),
+        );
+      });
+    });
+  }
 
   String _date = DateFormat.Hm().format(DateTime.now());
 
@@ -77,22 +94,42 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
+  Widget _buildPlaceholderImage() {
+    if (widget.model.profile != null) {
+      return CircleAvatar(
+        radius: 45,
+        backgroundImage: NetworkImage(url ?? widget.model.profile),
+      );
+    }
+    return CircleAvatar(
+      backgroundColor: kPrimaryColor,
+      radius: 60,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          const Icon(
+            Icons.person,
+            size: 60,
+            color: Colors.white,
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final drawerWidthPercentage = 0.7;
+    final drawerWidth = screenWidth * drawerWidthPercentage;
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     // http.get(
-      //     //   Uri.parse(uri),
-      //     // );
-      //   },
-      // ),
       appBar: AppBar(
-        title: const Text('Sewelni'),
+        title: Text(AppLocalizations.of(context)!.translate('Sewelni')),
         backgroundColor: kPrimaryColor,
       ),
       drawer: Drawer(
+        width: drawerWidth,
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -105,31 +142,17 @@ class _ChatScreenState extends State<ChatScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProfilePage(
-                            model: widget.model,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProfilePage(
+                              model: widget.model,
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      radius: 40,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          const Icon(
-                            Icons.person,
-                            size: 70,
-                            color: kPrimaryColor,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                        );
+                      },
+                      child: _buildPlaceholderImage()),
                   Text(
                     widget.model.name,
                     style: TextStyle(
@@ -160,7 +183,10 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                     SizedBox(width: 8),
                     Text(
-                      themeProvider.isDarkMode ? 'Dark Mode' : 'Light Mode',
+                      themeProvider.isDarkMode
+                          ? AppLocalizations.of(context)!.translate('Dark Mode')
+                          : AppLocalizations.of(context)!
+                              .translate('Light Mode'),
                       style: TextStyle(fontSize: 16),
                     ),
                   ],
@@ -169,7 +195,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             ListTile(
               leading: Icon(Icons.chat),
-              title: Text('New chat'),
+              title: Text(AppLocalizations.of(context)!.translate('New chat')),
               onTap: () {
                 _startNewChat();
                 Navigator.pop(context);
@@ -178,14 +204,16 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             ListTile(
               leading: Icon(Icons.language),
-              title: Text('Language'),
+              title: Text(AppLocalizations.of(context)!.translate('Language')),
               onTap: () {
+                _changeLanguage(context, Locale('fr'));
                 // Handle language selection
               },
             ),
             ListTile(
               leading: Icon(Icons.password),
-              title: Text('Change password'),
+              title: Text(
+                  AppLocalizations.of(context)!.translate('Change password')),
               onTap: () {
                 Navigator.push(
                   context,
@@ -205,7 +233,7 @@ class _ChatScreenState extends State<ChatScreen> {
             // ),
             ListTile(
               leading: Icon(Icons.logout),
-              title: Text('Log out'),
+              title: Text(AppLocalizations.of(context)!.translate('Log out')),
               onTap: () {
                 Navigator.pushReplacementNamed(context, '/');
                 Auth.clearTokens();
@@ -261,7 +289,8 @@ class _ChatScreenState extends State<ChatScreen> {
                       TextField(
                         controller: _textController,
                         decoration: InputDecoration(
-                          hintText: 'Type a message...',
+                          hintText: AppLocalizations.of(context)!
+                              .translate('Type a question...'),
                         ),
                       ),
                     ],
@@ -277,7 +306,8 @@ class _ChatScreenState extends State<ChatScreen> {
                   } else if (state is ChatError) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text(state.errorMessage),
+                        content: Text(AppLocalizations.of(context)!
+                            .translate(state.errorMessage)),
                       ),
                     );
                   }

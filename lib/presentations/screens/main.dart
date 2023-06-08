@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firstapp/logic/cubit/auth_cubit.dart';
 import 'package:firstapp/logic/cubit/change_pw_cubit.dart';
 import 'package:firstapp/logic/cubit/chat_cubit.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../logic/auth.dart';
+import '../../logic/cubit/change_info_cubit.dart';
 import '../providers/themeprovider.dart';
 import 'LoginScreen.dart';
 import 'home.dart';
@@ -17,6 +19,7 @@ import 'localizations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   // await Auth().linitializeOnesignal();
   runApp(const MyApp());
 }
@@ -40,6 +43,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<ChatCubit>(
           create: (context) => ChatCubit(),
+        ),
+        BlocProvider<ChangeInfoCubit>(
+          create: (context) => ChangeInfoCubit(),
         ),
         ChangeNotifierProvider<ThemeProvider>(
           create: (_) => ThemeProvider(),
@@ -78,4 +84,6 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
+  static void setLocale(BuildContext context, Locale locale) {}
 }

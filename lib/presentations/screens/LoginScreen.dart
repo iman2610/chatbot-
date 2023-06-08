@@ -12,6 +12,8 @@ import '../constants/constants.dart';
 import 'RegistrationPage.dart';
 import 'package:flutter/services.dart';
 
+import 'localizations.dart';
+
 // import 'package:flutter/sevices.dart';
 Widget heightSpacer(double myHeight) => SizedBox(height: myHeight);
 final TextEditingController _mailController = TextEditingController();
@@ -35,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Email',
+            AppLocalizations.of(context)!.translate('Email'),
             style: TextStyle(
                 color: kContentColorDarkTheme,
                 fontSize: 16,
@@ -68,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   contentPadding: EdgeInsets.only(top: 14),
                   prefixIcon: Icon(Icons.email,
                       color: Color.fromARGB(255, 115, 82, 28)),
-                  hintText: 'Email',
+                  hintText: AppLocalizations.of(context)!.translate('Email'),
                   hintStyle: TextStyle(color: kContentColorLightTheme)),
             ),
           )
@@ -82,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Email',
+          AppLocalizations.of(context)!.translate('Email'),
           style: TextStyle(
               color: kContentColorDarkTheme,
               fontSize: 16,
@@ -110,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 contentPadding: EdgeInsets.only(top: 14),
                 prefixIcon:
                     Icon(Icons.lock, color: Color.fromARGB(255, 115, 82, 28)),
-                hintText: 'Password',
+                hintText: AppLocalizations.of(context)!.translate('Password'),
                 hintStyle: TextStyle(color: kContentColorLightTheme)),
           ),
         )
@@ -123,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
-          'Don\'t have an account? ',
+          AppLocalizations.of(context)!.translate("Don't have an account?"),
           style: TextStyle(
             color: kContentColorLightTheme,
           ),
@@ -133,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
             navigateToRegisterPage(context);
           },
           child: Text(
-            'Register',
+            AppLocalizations.of(context)!.translate('Register'),
             style: TextStyle(
               decoration: TextDecoration.underline,
               color: kPrimaryColor,
@@ -164,15 +166,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                 } else if (state is AuthError) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Check your credentials'),
+                     SnackBar(
+                      content: Text(AppLocalizations.of(context)!.translate('Check your credentials')),
                     ),
                   );
                 }
               },
               builder: (context, state) {
                 return PrimaryButton(
-                  text: 'Login',
+                  text: AppLocalizations.of(context)!.translate('Login'),
                   press: () {
                     if (_globalKey.currentState!.validate()) {
                       context.read<AuthCubit>().login(

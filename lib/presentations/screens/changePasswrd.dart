@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../constants/constants.dart';
+import 'localizations.dart';
 
 Widget heightSpacer(double myHeight) => SizedBox(height: myHeight);
 final TextEditingController _oldpasswordController = TextEditingController();
@@ -26,13 +27,6 @@ class ChangePasswordState extends State<ChangePassword> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          'Password',
-          style: TextStyle(
-              color: kContentColorLightTheme,
-              fontSize: 16,
-              fontWeight: FontWeight.bold),
-        ),
         SizedBox(height: 10),
         Container(
             alignment: Alignment.centerLeft,
@@ -47,14 +41,19 @@ class ChangePasswordState extends State<ChangePassword> {
                 ]),
             height: 60,
             child: Padding(
-              padding: EdgeInsets.only(left: 15), // Adjust the value as needed
+              padding: EdgeInsets.only(left: 5), // Adjust the value as needed
               child: TextField(
                 controller: _oldpasswordController,
                 obscureText: true,
                 style: TextStyle(color: kContentColorLightTheme),
                 decoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.only(top: 14),
+                    prefixIcon: Icon(Icons.password,
+                        color: Color.fromARGB(255, 115, 82, 28)),
+                    hintText:
+                        AppLocalizations.of(context)!.translate('Old password'),
+                    hintStyle: TextStyle(color: kContentColorLightTheme)),
               ),
             ))
       ],
@@ -65,13 +64,6 @@ class ChangePasswordState extends State<ChangePassword> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          'Confirm password ',
-          style: TextStyle(
-              color: kContentColorLightTheme,
-              fontSize: 16,
-              fontWeight: FontWeight.bold),
-        ),
         SizedBox(height: 10),
         Container(
             alignment: Alignment.centerLeft,
@@ -86,14 +78,19 @@ class ChangePasswordState extends State<ChangePassword> {
                 ]),
             height: 60,
             child: Padding(
-              padding: EdgeInsets.only(left: 15), // Adjust the value as needed
+              padding: EdgeInsets.only(left: 5), // Adjust the value as needed
               child: TextField(
                 controller: _newpasswordController,
                 obscureText: true,
                 style: TextStyle(color: kContentColorLightTheme),
                 decoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.only(top: 14),
+                    prefixIcon: Icon(Icons.lock,
+                        color: Color.fromARGB(255, 115, 82, 28)),
+                    hintText:
+                        AppLocalizations.of(context)!.translate('New password'),
+                    hintStyle: TextStyle(color: kContentColorLightTheme)),
               ),
             ))
       ],
@@ -104,13 +101,6 @@ class ChangePasswordState extends State<ChangePassword> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          'Confirm password ',
-          style: TextStyle(
-              color: kContentColorLightTheme,
-              fontSize: 16,
-              fontWeight: FontWeight.bold),
-        ),
         SizedBox(height: 10),
         Container(
             alignment: Alignment.centerLeft,
@@ -125,14 +115,19 @@ class ChangePasswordState extends State<ChangePassword> {
                 ]),
             height: 60,
             child: Padding(
-              padding: EdgeInsets.only(left: 15), // Adjust the value as needed
+              padding: EdgeInsets.only(left: 5), // Adjust the value as needed
               child: TextField(
                 controller: _newpassword2Controller,
                 obscureText: true,
                 style: TextStyle(color: kContentColorLightTheme),
                 decoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.only(top: 14),
+                    prefixIcon: Icon(Icons.lock,
+                        color: Color.fromARGB(255, 115, 82, 28)),
+                    hintText: AppLocalizations.of(context)!
+                        .translate('Confirm password'),
+                    hintStyle: TextStyle(color: kContentColorLightTheme)),
               ),
             ))
       ],
@@ -143,7 +138,7 @@ class ChangePasswordState extends State<ChangePassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Change password '),
+        title: Text(AppLocalizations.of(context)!.translate('Change password')),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -153,7 +148,7 @@ class ChangePasswordState extends State<ChangePassword> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 20),
+                SizedBox(height: 30),
                 buildoldPassword(),
                 SizedBox(height: 20),
                 buildnewPassword(),
@@ -178,7 +173,8 @@ class ChangePasswordState extends State<ChangePassword> {
                             } else if (state is ChangePwError) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text(state.errorMessage),
+                                  content: Text(AppLocalizations.of(context)!
+                                      .translate(state.errorMessage)),
                                 ),
                               );
                             }
@@ -207,7 +203,8 @@ class ChangePasswordState extends State<ChangePassword> {
                                       ),
                                     );
                                   } else {
-                                    return const Text('Confirmer');
+                                    return Text(AppLocalizations.of(context)!
+                                        .translate('Confirmer'));
                                   }
                                 },
                               ),

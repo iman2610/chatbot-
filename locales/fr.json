@@ -1,18 +1,25 @@
 {
     "Email": "Email",
     "Password": "Mot de passe",
-    "Log in": "Se connecter",
+    "Confirmer":"Confirmer",
+    "Login": "Se connecter",
+    "Profile":"Profil",
+    "New password":"Nouveau mot de passe",
+    "Old password":"Ancien mot de passe",
     "Don't have an account?": "Vous n'avez pas de compte ?",
     "Register": "S'inscrire",
     "Name": "Nom",
+    "Check your credentials":"Vérifiez vos identifiants",
     "Phone number": "Numéro de téléphone",
     "Confirm password": "Confirmer le mot de passe",
     "Sewelni": "Sewelni",
+    "Type a question...":"Tapez une question...",
     "Dark Mode": "Mode sombre",
     "Light Mode": "Mode clair",
     "New chat": "Nouvelle discussion",
     "Language": "Langue",
-    "Change Password": "Changer le mot de passe",
+    "Change password": "Changer le mot de passe",
     "Settings": "Paramètres",
-    "Log out": "Déconnexion"
+    "Log out": "Déconnexion",
+    "Update":"Mise à jour"
     }

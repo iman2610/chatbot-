@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 
 import '../constants/constants.dart';
 import 'LoginScreen.dart';
+import 'localizations.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -26,14 +27,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          'Name',
-          style: TextStyle(
-              color: kContentColorLightTheme,
-              fontSize: 16,
-              fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 10),
+        SizedBox(height: 30),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
@@ -47,13 +41,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ]),
           height: 60,
           child: Padding(
-            padding: EdgeInsets.only(left: 15), // Adjust the value as needed
+            padding: EdgeInsets.only(left: 5), // Adjust the value as needed
             child: TextField(
               controller: _nameController,
               style: TextStyle(color: kContentColorLightTheme),
               decoration: InputDecoration(
-                border: InputBorder.none,
-              ),
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.only(top: 14),
+                  prefixIcon: Icon(Icons.person,
+                      color: Color.fromARGB(255, 115, 82, 28)),
+                  hintText: AppLocalizations.of(context)!.translate('Name'),
+                  hintStyle: TextStyle(color: kContentColorLightTheme)),
             ),
           ),
         ),
@@ -66,14 +64,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            'Email',
-            style: TextStyle(
-                color: kContentColorLightTheme,
-                fontSize: 16,
-                fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
+          SizedBox(height: 20),
           Container(
             alignment: Alignment.centerLeft,
             decoration: BoxDecoration(
@@ -87,13 +78,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ]),
             height: 60,
             child: Padding(
-              padding: EdgeInsets.only(left: 15), // Adjust the value as needed
+              padding: EdgeInsets.only(left: 5), // Adjust the value as needed
               child: TextField(
                 controller: _emailController,
                 style: TextStyle(color: kContentColorLightTheme),
                 decoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.only(top: 14),
+                    prefixIcon: Icon(Icons.email,
+                        color: Color.fromARGB(255, 115, 82, 28)),
+                    hintText: AppLocalizations.of(context)!.translate('Email'),
+                    hintStyle: TextStyle(color: kContentColorLightTheme)),
               ),
             ),
           ),
@@ -106,14 +101,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          'Phone number',
-          style: TextStyle(
-              color: kContentColorLightTheme,
-              fontSize: 16,
-              fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 10),
+        SizedBox(height: 20),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
@@ -127,13 +115,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ]),
           height: 60,
           child: Padding(
-            padding: EdgeInsets.only(left: 15), // Adjust the value as needed
+            padding: EdgeInsets.only(left: 5), // Adjust the value as needed
             child: TextField(
               controller: _phoneController,
               style: TextStyle(color: kContentColorLightTheme),
               decoration: InputDecoration(
-                border: InputBorder.none,
-              ),
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.only(top: 14),
+                  prefixIcon: Icon(Icons.phone,
+                      color: Color.fromARGB(255, 115, 82, 28)),
+                  hintText:
+                      AppLocalizations.of(context)!.translate('Phone number'),
+                  hintStyle: TextStyle(color: kContentColorLightTheme)),
             ),
           ),
         )
@@ -145,14 +138,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          'Password',
-          style: TextStyle(
-              color: kContentColorLightTheme,
-              fontSize: 16,
-              fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 10),
+        SizedBox(height: 20),
         Container(
             alignment: Alignment.centerLeft,
             decoration: BoxDecoration(
@@ -166,16 +152,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ]),
             height: 60,
             child: Padding(
-              padding: EdgeInsets.only(left: 15), // Adjust the value as needed
+              padding: EdgeInsets.only(left: 5), // Adjust the value as needed
               child: TextField(
                 controller: _passwordController,
                 obscureText: true,
                 style: TextStyle(color: kContentColorLightTheme),
                 decoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.only(top: 14),
+                    prefixIcon: Icon(Icons.lock,
+                        color: Color.fromARGB(255, 115, 82, 28)),
+                    hintText:
+                        AppLocalizations.of(context)!.translate('Password'),
+                    hintStyle: TextStyle(color: kContentColorLightTheme)),
               ),
-            ))
+            )
+            )
       ],
     );
   }
@@ -184,14 +176,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          'Confirm password ',
-          style: TextStyle(
-              color: kContentColorLightTheme,
-              fontSize: 16,
-              fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 10),
+        SizedBox(height: 20),
         Container(
             alignment: Alignment.centerLeft,
             decoration: BoxDecoration(
@@ -205,14 +190,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ]),
             height: 60,
             child: Padding(
-              padding: EdgeInsets.only(left: 15), // Adjust the value as needed
+              padding: EdgeInsets.only(left: 5), // Adjust the value as needed
               child: TextField(
                 controller: _password2Controller,
                 obscureText: true,
                 style: TextStyle(color: kContentColorLightTheme),
                 decoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.only(top: 14),
+                    prefixIcon: Icon(Icons.lock,
+                        color: Color.fromARGB(255, 115, 82, 28)),
+                    hintText: AppLocalizations.of(context)!
+                        .translate('Confirm password'),
+                    hintStyle: TextStyle(color: kContentColorLightTheme)),
               ),
             ))
       ],
@@ -225,7 +215,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       backgroundColor: kContentColorDarkTheme,
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: const Text('Register'),
+        title: Text(AppLocalizations.of(context)!.translate('Register')),
       ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -281,8 +271,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                     Navigator.pop(context);
                                   } else if (state is RegistError) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text('Check your credentials'),
+                                      SnackBar(
+                                        content: Text(
+                                            AppLocalizations.of(context)!
+                                                .translate(
+                                                    'Check your credentials')),
                                       ),
                                     );
                                   }
@@ -314,7 +307,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                             ),
                                           );
                                         } else {
-                                          return const Text('Register',
+                                          return Text(
+                                              AppLocalizations.of(context)!
+                                                  .translate('Register'),
                                               style: TextStyle(
                                                   color: Colors.white));
                                         }
